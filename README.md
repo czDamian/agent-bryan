@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Agent One
 
-## Getting Started
+Hi, I am Agent One
 
-First, run the development server:
+datastax
+tailwindcss
+gemini
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+DETAILS
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Bounty Description:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Create an AI-powered agent that introduces users to Bryan Johnson’s “Don’t Die Blueprint” and generates personalized blueprints based on user-provided data. The agent should help users understand the principles of Bryan Johnson’s approach to longevity and offer actionable insights tailored to their individual needs.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Deliverables:
 
-## Learn More
+    Interactive AI Agent:
 
-To learn more about Next.js, take a look at the following resources:
+The agent should:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Explain Bryan Johnson’s “Don’t Die Blueprint” in simple terms.
+    Engage users by answering questions about the blueprint.
+    Provide relevant insights about longevity practices.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    Personalized Blueprint:
 
-## Deploy on Vercel
+    Using user-provided data (e.g., age, diet, activity level, health goals), the agent should:
+    Generate a personalized version of the “Don’t Die Blueprint.”
+    Offer recommendations that align with the user’s health and lifestyle.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    Integration Features:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Optionally integrate with health trackers or APIs (e.g., wearable devices, fitness apps) to improve personalization.
+    Provide downloadable reports or suggestions in a user-friendly format.
+
+    Open-Source Codebase:
+
+    The project must be open-source and published on GitHub with clear documentation for setup and usage.
+
+Evaluation Criteria:
+
+Submissions will be judged on the following factors:
+
+    Functionality: How well the agent explains the “Don’t Die Blueprint” and generates personalized recommendations.
+    Accuracy: The alignment of generated blueprints with Bryan Johnson’s principles.
+    User Experience: Simplicity and effectiveness of user interaction.
+    Scalability: Potential for integration with other tools or platforms.
+    Documentation: Clear instructions on how to use and deploy the agent.
+
+Resources: Website - https://blueprint.bryanjohnson.com/
