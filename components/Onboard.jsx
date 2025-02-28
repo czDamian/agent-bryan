@@ -75,8 +75,8 @@ const Onboard = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-gray-900 text-white rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">
+    <div className="max-w-md mt-20 mx-auto p-6 bg-gradient-to-b from-[#CBB8BD] to-[#774F65] text-black rounded-lg">
+      <h2 className="text-2xl text-center font-bold mb-4">
         {isRegister ? "Register" : "Login"}
       </h2>
 
@@ -87,10 +87,10 @@ const Onboard = () => {
             <input
               type="text"
               {...register("name")}
-              className="w-full p-2 bg-gray-800 border border-gray-700 rounded"
+              className="w-full p-2 rounded"
             />
             {errors.name && (
-              <p className="text-red-500 text-sm">{errors.name.message}</p>
+              <p className="text-neutral-800 text-sm">{errors.name.message}</p>
             )}
           </div>
         )}
@@ -100,10 +100,10 @@ const Onboard = () => {
           <input
             type="email"
             {...register("email")}
-            className="w-full p-2 bg-gray-800 border border-gray-700 rounded"
+            className="w-full p-2 rounded"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
+            <p className="text-neutral-800 text-sm">{errors.email.message}</p>
           )}
         </div>
 
@@ -112,27 +112,30 @@ const Onboard = () => {
           <input
             type="password"
             {...register("password")}
-            className="w-full p-2 bg-gray-800 border border-gray-700 rounded"
+            className="w-full p-2 rounded"
           />
           {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password.message}</p>
+            <p className="text-neutral-800 text-sm">
+              {errors.password.message}
+            </p>
           )}
         </div>
-
-        <button
-          type="submit"
-          className="w-full p-2 bg-green-600 rounded hover:bg-green-700 disabled:opacity-50"
-          disabled={loading}
-        >
-          {loading ? "Processing..." : isRegister ? "Register" : "Login"}
-        </button>
+        <div className="py-5">
+          <button
+            type="submit"
+            className="w-full  p-2 bg-light-pink-50 rounded hover:bg-light-pink-200 disabled:opacity-50"
+            disabled={loading}
+          >
+            {loading ? "Processing..." : isRegister ? "Register" : "Login"}
+          </button>
+        </div>
       </form>
       {responseMessage && (
         <p
           className={`text-sm italic text-center mt-2 ${
             responseMessage.includes("success")
               ? "text-green-400"
-              : "text-red-400"
+              : "text-neutral-800"
           }`}
         >
           {responseMessage}
@@ -140,7 +143,7 @@ const Onboard = () => {
       )}
       <button
         onClick={() => setIsRegister(!isRegister)}
-        className="mt-4 text-sm text-blue-400 hover:underline"
+        className="mt-4 text-sm text-white hover:underline"
       >
         {isRegister
           ? "Already have an account? Login"

@@ -90,9 +90,7 @@ const ChatHistory = () => {
   return (
     <div>
       <Sidebar />
-
-      <h2 className="text-xl font-bold mb-4">Chat History</h2>
-      <div className="max-w-lg mx-auto flex flex-col h-[90vh] p-6 bg-gray-900 text-white">
+      <div className="max-w-lg mx-auto flex flex-col h-[90vh] p-6 ">
         {loading ? (
           <div className="flex items-center justify-center">
             <AiOutlineLoading3Quarters className="animate-spin text-3xl" />
@@ -112,8 +110,10 @@ const ChatHistory = () => {
                   {message.role === "user" ? "You: " : "AI: "}
                 </strong> */}
                 <div
-                  className={`p-3  max-w-[80%] rounded-lg ${
-                    message.role === "AI" ? "bg-blue-600" : "bg-gray-700"
+                  className={`p-3  max-w-[80%] selection:text-light-pink-50 selection:bg-dark-pink-100 rounded-lg ${
+                    message.role === "AI"
+                      ? "bg-light-pink-200 "
+                      : "bg-light-pink-50"
                   }`}
                 >
                   <ReactMarkdown>{message.msg}</ReactMarkdown>
@@ -125,20 +125,20 @@ const ChatHistory = () => {
           <p className="text-gray-400">No chat history found.</p>
         )}
         {/* Input & Send Button */}
-        <div className="flex items-center gap-2 p-4 bg-gray-800 rounded-lg">
+        <div className="flex items-center gap-2 p-4 bg-light-pink-50 rounded-lg">
           <input
             type="text"
             placeholder="Who is the author of the “Don’t Die Blueprint”?"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-white placeholder-gray-400"
+            className="flex-1 bg-transparent outline-none"
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             autoFocus
           />
           <button
             onClick={sendMessage}
             disabled={loading}
-            className="p-2 bg-green-600 rounded-full hover:bg-green-700"
+            className="p-2 bg-light-pink-50 rounded-full hover:bg-light-pink-200"
           >
             {loading ? (
               <AiOutlineLoading3Quarters className="animate-spin" />

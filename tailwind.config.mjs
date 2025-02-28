@@ -8,14 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "light-pink-50": "#FAF2F4",
+        "light-pink-100": "#BD99A2", 
+        "light-pink-200": "#D9D9D9",
+        "dark-pink-100": "#774F65",
       },
       fontFamily: {
-        inter: "var(--font-inter)",
+        coolvetica: "var(--font-coolvetica)",
         rubik: "var(--font-rubik)",
       },
-    }, 
+    },
   },
   plugins: [],
 };

@@ -26,28 +26,25 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-white bg-blue-600"
-      >
-        <AiOutlineMenu size={24} />
+    <div className="">
+      <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-white ">
+        <AiOutlineMenu size={24} className="ml-4" />
       </button>
       {isOpen && (
-        <div className="fixed left-0 top-0 w-64 h-full bg-gray-900 text-white p-4 shadow-lg">
+        <div className="fixed left-0 top-0 w-64 h-full bg-light-pink-50 text-black p-4 shadow-lg">
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 text-white bg-red-600 mb-4"
+            className="p-2 text-white bg-light-pink-100 mb-8"
           >
             <AiOutlineClose size={24} />
           </button>
-          <h2 className="text-xl font-bold mb-4">Chat History</h2>
+          <h2 className="text-xl font-semibold mb-4">Recent Chats</h2>
           <ul>
             {history.map((chat) => (
-              <li key={chat._id} className="mb-2">
+              <li key={chat._id} className="">
                 <Link
                   href={`/c/${chat._id}`}
-                  className="text-blue-400 hover:underline capitalize"
+                  className="block  py-2 px-6 hover:bg-light-pink-100 rounded-md capitalize"
                 >
                   {chat.messages.length > 0
                     ? chat.messages[0].msg.split(" ").slice(0, 3).join(" ") +

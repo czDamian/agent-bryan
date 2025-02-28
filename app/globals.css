@@ -2,23 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
+  @apply bg-gradient-to-b min-h-[100vh] from-light-pink-100 to-dark-pink-100 m-0 p-0 font-rubik;
 }
 
-body{
-  @apply bg-gray-900 m-0 p-0 font-rubik;
+input {
+  @apply outline-none bg-light-pink-50 border-none active:outline-none  focus:outline-none text-black;
 }

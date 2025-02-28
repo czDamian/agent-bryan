@@ -1,14 +1,21 @@
-import { Inter, Rubik } from "next/font/google";
+import localFont from "next/font/local";
+import { Rubik } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
 
 const rubik = Rubik({
   variable: "--font-rubik",
   subsets: ["latin"],
 });
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+
+const coolvetica = localFont({
+  src: [
+    {
+      path: "./font/Coolvetica.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-coolvetica",
 });
 
 export const metadata = {
@@ -20,9 +27,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${rubik.variable} font-rubik  antialiased`}
+        className={`${coolvetica.variable} ${rubik.variable} font-rubik  antialiased`}
       >
-        <Header />
         {children}
       </body>
     </html>
