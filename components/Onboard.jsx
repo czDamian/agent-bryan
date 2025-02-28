@@ -47,6 +47,7 @@ const Onboard = () => {
           ...data,
           type: isRegister ? "register" : "login",
         }),
+        credentials: "include",
       });
 
       const result = await response.json();
@@ -54,6 +55,12 @@ const Onboard = () => {
       if (result?.message === "Login successful") {
         setTimeout(() => {
           router.push("/chat");
+          console.log("res", result);
+        }, 3000);
+      }
+      if (result?.message === "Registered successfully, proceed to login") {
+        setTimeout(() => {
+          setIsRegister(false);
         }, 3000);
       }
 

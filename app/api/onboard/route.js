@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { serialize } from "cookie";
 
 const {
   ASTRA_DB_API_ENDPOINT,
@@ -15,36 +16,6 @@ const {
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
 const db = client.db(ASTRA_DB_API_ENDPOINT, { namespace: ASTRA_DB_NAMESPACE });
 const usersCollection = db.collection(ASTRA_DB_USER_COLLECTION);
-
-const createCollection = async () => {
-  try {
-    if (!ASTRA_DB_API_ENDPOINT || !ASTRA_DB_APPLICATION_TOKEN) {
-      throw new Error("Missing AstraDB connection details in .env");
-    }
-    // Check if collection already exists
-    const collections = await db.listCollections();
-    if (collections.includes(ASTRA_DB_USER_COLLECTION)) {
-      console.log(`Collection "${ASTRA_DB_USER_COLLECTION}" already exists.`);
-      return;
-    }
-
-    // Create collection
-    await db.createCollection(ASTRA_DB_USER_COLLECTION);
-    console.log(
-      `Collection "${ASTRA_DB_USER_COLLECTION}" created successfully.`
-    );
-  } catch (error) {
-    console.error("Error creating collection:", error);
-  }
-};
-
-// Run the function
-// createCollection();
-
-(async () => {
-  const colls = await db.listCollections();
-  console.log("Connected to AstraDB:", colls);
-})();
 
 export async function POST(request) {
   try {
@@ -79,10 +50,11 @@ export async function POST(request) {
         name,
         email,
         password: hashedPassword,
+        createdAt: new Date(),
       });
 
       return NextResponse.json({
-        message: "Registered successfully, proceed to login",
+        message: "Registered successfully, proceed to login", //changing this affects the frontend, leave the success message as it is
       });
     }
 
@@ -109,7 +81,22 @@ export async function POST(request) {
         }
       );
 
-      return NextResponse.json({ message: "Login successful", token });
+      // set the cookie
+      const cookie = serialize("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Strict",
+        path: "/",
+        maxAge: 7 * 24 * 60 * 60, // 7 days
+      });
+
+      return new Response(JSON.stringify({ message: "Login successful" }), {
+        status: 200,
+        headers: {
+          "Set-Cookie": cookie,
+          "Content-Type": "application/json",
+        },
+      });
     }
 
     return NextResponse.json(

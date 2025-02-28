@@ -11,6 +11,7 @@ const {
   ASTRA_DB_APPLICATION_TOKEN,
   ASTRA_DB_NAMESPACE,
   ASTRA_DB_COLLECTION,
+  ASTRA_DB_CHAT_HISTORY_COLLECTION
 } = process.env;
 
 // Initialize the client and model
@@ -30,7 +31,7 @@ const splitter = new RecursiveCharacterTextSplitter({
 });
 
 const createCollection = async () => {
-  const res = await db.createCollection(ASTRA_DB_COLLECTION, {
+  const res = await db.createCollection(ASTRA_DB_CHAT_HISTORY_COLLECTION, {
     vector: {
       dimension: 768, //1536 is for openAI, 768 is for gemini
       metric: "dot_product",
@@ -98,4 +99,4 @@ const loadSampleData = async () => {
   }
 };
 
-loadSampleData();
+// loadSampleData();

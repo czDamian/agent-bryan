@@ -1,8 +1,8 @@
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
-// Environment variables
 const {
   GEMINI_API_KEY,
   ASTRA_DB_API_ENDPOINT,
@@ -11,6 +11,7 @@ const {
   ASTRA_DB_COLLECTION,
   ASTRA_DB_CHAT_HISTORY_COLLECTION,
   ASTRA_DB_USER_COLLECTION,
+  JWT_SECRET,
 } = process.env;
 
 // Validate required environment variables
@@ -18,15 +19,13 @@ if (!ASTRA_DB_API_ENDPOINT || !ASTRA_DB_APPLICATION_TOKEN) {
   throw new Error("Missing Astra DB connection details in .env");
 }
 
-// Initialize clients
+// Initialize database and AI clients
 function initClients() {
-  // Initialize Gemini AI
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
   const embeddingModel = genAI.getGenerativeModel({
     model: "text-embedding-004",
   });
 
-  // Initialize Astra DB
   const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
   const db = client.db(ASTRA_DB_API_ENDPOINT, {
     namespace: ASTRA_DB_NAMESPACE,
@@ -44,125 +43,104 @@ function initClients() {
   };
 }
 
-// Database service
+// Database Service
 const dbService = {
-  // Verify database connection
-  verifyConnection: async function (db) {
-    try {
-      const colls = await db.listCollections();
-      console.log("Connected to AstraDB:", colls);
-      return true;
-    } catch (error) {
-      console.error("Failed to connect to AstraDB:", error);
-      return false;
-    }
+  async validateUser(collections, email) {
+    return await collections.users.findOne({ email });
   },
 
-  // Validate user exists
-  validateUser: async function (collections, email) {
-    const user = await collections.users.findOne({ email });
-    return user;
+  async getChatHistory(collections, chatId) {
+    return await collections.chatHistory.findOne({ _id: chatId });
   },
 
-  // Get or initialize chat history
-  getChatHistory: async function (collections, userId) {
-    const results = await collections.chatHistory
-      .find({ id: userId })
-      .toArray();
-    console.log("chat history", results);
-
-    // Get the first document or create a new one if none exists
-    let chatHistory =
-      results && results.length > 0
-        ? results[0]
-        : { id: userId, messages: [], createdAt: new Date() };
-
-    return chatHistory;
+  async createChatHistory(collections, userEmail) {
+    const chatHistory = {
+      userId: userEmail,
+      messages: [],
+      createdAt: new Date(),
+    };
+    const result = await collections.chatHistory.insertOne(chatHistory);
+    return result.insertedId; // Get new chat ID
   },
 
-  // Perform vector search
-  vectorSearch: async function (collection, vector, limit = 10) {
-    const searchResults = collection.find(null, {
-      sort: {
-        $vector: vector,
-      },
-      limit,
-    });
-    return await searchResults.toArray();
-  },
-
-  // Save chat history
-  saveChatHistory: async function (collections, userId, messages) {
+  async saveChatHistory(collections, chatId, messages) {
     return await collections.chatHistory.updateOne(
-      { id: userId },
+      { _id: chatId },
       { $set: { messages } },
       { upsert: true }
     );
   },
+  async vectorSearch(collection, vector, limit = 10) {
+    const searchResults = collection.find(null, {
+      sort: { $vector: vector },
+      limit,
+    });
+    return await searchResults.toArray();
+  },
 };
 
-// AI service
+// AI Service
 const aiService = {
-  // Generate embeddings
-  generateEmbedding: async function (embeddingModel, text) {
+  async generateEmbedding(embeddingModel, text) {
     const embeddingResponse = await embeddingModel.embedContent(text);
     return embeddingResponse.embedding.values;
   },
 
-  // Get AI response
-  getAIResponse: async function (genAI, message, history, context) {
-    const systemInstruction = `You are Agent Bryan, an AI assistant specializing in Bryan Johnson's "Don't Die Blueprint." 
-    Your role is to help users understand the blueprint and provide insights on longevity and health optimization. Try and engage the user in a conversation
-
+  async getAIResponse(genAI, message, history, context) {
+    const systemInstruction = `You are Agent Bryan, an AI assistant specializing in Bryan Johnson's \"Don't Die Blueprint.\" Your role is to help users understand the blueprint and provide insights on longevity and health optimization. Try and engage the user in a conversation
+    - If a user asks about Bryan or any other of his works, explain it to the user
     - If a user asks about the blueprint, explain it in simple terms and provide relevant insights.  Also send them the link [The Personalize Page](/personalize) so that they can use the blueprint if they want to. Also bold the link.
     - If a user asks for a personalized blueprint, ask him to provide personal details (age, diet, activity level, health goals) only,and then you will generate  tailored recommendations for him based on the blueprint principles. Don't say that you can't offer medical advice. 
     - If a user sends only a greeting (e.g., "hi", "hello"), respond positively and introduce the "Don't Die Blueprint" in a friendly way.  
     - If a question is unrelated, respond with: 'I can only answer questions about the Don't Die Blueprint and longevity.'  
     -  Respond in the same language as the query.  
     - Before responding, check if the answer to the query is in the ${context} above.  
-      If found, use that information. Otherwise, rely on your originally trained data.  
+      If found, use that information. Otherwise, rely on your originally trained data.  Don't return an object or array no matter what.
     
     The question to answer is: ${message}`;
-
     const extendedModel = genAI.getGenerativeModel({
       model: "gemini-2.0-flash",
       systemInstruction,
     });
-
     const chat = extendedModel.startChat({ history });
     const result = await chat.sendMessage(message);
     return result.response.text();
   },
 };
 
-// Initialize on startup
+// Initialize Clients
 const { genAI, embeddingModel, db, collections } = initClients();
-dbService.verifyConnection(db);
 
-// Main handler
+// Main API Handler
 export async function POST(request) {
-  // TODO: Implement proper authentication
-  const userEmail = "admin@admin.com";
-  let docContext = "";
-
+  // Get the token from the cookie and ensure user is validated before making requests
+  const token = request.cookies.get("token")?.value;
+  if (!token) {
+    console.log("no token sent");
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
-    // Validate user
-    const validateUser = await dbService.validateUser(collections, userEmail);
-    if (!validateUser) {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const userEmail = decoded.email;
+    console.log("logged in to chat as", userEmail);
+    const { message, history, chatId } = await request.json();
+    console.log("Request:", { message, history, chatId });
+
+    // Validate user email
+    if (!userEmail) {
       return NextResponse.json(
         { error: "User not logged in" },
         { status: 401 }
       );
     }
 
-    const userId = validateUser._id;
-    let chatHistory = await dbService.getChatHistory(collections, userId);
+    // Validate user existence
+    const user = await dbService.validateUser(collections, userEmail);
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
 
-    // Parse request
-    const { message, history } = await request.json();
-    console.log("Message:", message);
-    console.log("History:", history);
-
+    // Validate message
     if (!message) {
       return NextResponse.json(
         { error: "No message provided" },
@@ -170,28 +148,24 @@ export async function POST(request) {
       );
     }
 
-    try {
-      // Generate embedding and search for relevant context
-      const vector = await aiService.generateEmbedding(embeddingModel, message);
-      const searchResultsArray = await dbService.vectorSearch(
-        collections.data,
-        vector
-      );
-      console.log("Search Results:", searchResultsArray);
+    // Determine chat history handling
+    let chatHistory;
+    let activeChatId = chatId;
 
-      if (!Array.isArray(searchResultsArray)) {
-        throw new Error("AstraDB query did not return an array.");
+    if (chatId) {
+      chatHistory = await dbService.getChatHistory(collections, chatId);
+      if (!chatHistory) {
+        return NextResponse.json({ error: "Chat not found" }, { status: 404 });
       }
+    } else {
+      activeChatId = await dbService.createChatHistory(collections, userEmail);
+      chatHistory = { userId: userEmail, messages: [], createdAt: new Date() };
+    }
 
-      // Construct context from search results
-      const docsMap = searchResultsArray?.map((doc) => doc.text);
-      docContext = JSON.stringify(docsMap);
-      console.log(docContext);
-    } catch (error) {
-      console.log("Error during vector search:", error);
+    if (chatHistory.messages.length >= 10) {
       return NextResponse.json(
-        { error: "Failed to query DB" },
-        { status: 500 }
+        { error: "Message limit reached", limitReached: true },
+        { status: 403 }
       );
     }
 
@@ -200,33 +174,25 @@ export async function POST(request) {
       genAI,
       message,
       history,
-      docContext
+      ""
     );
 
-    // Save chat history
-    // Make sure chatHistory is properly structured
-    if (!chatHistory) {
-      chatHistory = { id: userId, messages: [] };
-    }
+    // Update chat history
+    chatHistory.messages.push(
+      { role: "user", msg: message },
+      { role: "AI", msg: responseText }
+    );
+    await dbService.saveChatHistory(
+      collections,
+      activeChatId,
+      chatHistory.messages
+    );
 
-    // Make sure messages is an array
-    if (!Array.isArray(chatHistory.messages)) {
-      chatHistory.messages = [];
-    }
-
-    // Add new messages
-    chatHistory.messages.push(message, responseText);
-
-    // Save the updated chat history
-    await dbService.saveChatHistory(collections, userId, chatHistory.messages);
-    return NextResponse.json({ message: responseText });
+    return NextResponse.json({ message: responseText, chatId: activeChatId });
   } catch (error) {
     console.error("API Error:", error);
     return NextResponse.json(
-      {
-        error: "Failed to process request",
-        details: error.message,
-      },
+      { error: "Failed to process request", details: error.message },
       { status: 500 }
     );
   }

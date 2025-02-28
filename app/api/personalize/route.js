@@ -1,6 +1,7 @@
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 const {
   GEMINI_API_KEY,
@@ -8,6 +9,7 @@ const {
   ASTRA_DB_APPLICATION_TOKEN,
   ASTRA_DB_NAMESPACE,
   ASTRA_DB_COLLECTION,
+  JWT_SECRET,
 } = process.env;
 
 // Initialize the client
@@ -26,12 +28,14 @@ if (!ASTRA_DB_API_ENDPOINT || !ASTRA_DB_APPLICATION_TOKEN) {
   throw new Error("Missing Astra DB connection details in .env");
 }
 
-(async () => {
-  const colls = await db.listCollections();
-  console.log("Connected to AstraDB:", colls);
-})();
-
 export async function POST(request) {
+  // Get the token from the cookie and ensure user is validated before making requests
+  const token = request.cookies.get("token")?.value;
+  if (!token) {
+    console.log("no token sent");
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { message } = await request.json();
   console.log("Message:", message);
   if (!message)
@@ -45,6 +49,9 @@ export async function POST(request) {
   console.log("Name of User:", nameOfUser);
   try {
     try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      const userEmail = decoded.email;
+      console.log("accessing personalize page as", userEmail);
       // Generate embedding for the latest message
       //   const embeddingResponse = await embeddingModel.embedContent(message);
       const embeddingResponse = await embeddingModel.embedContent(
@@ -62,7 +69,7 @@ export async function POST(request) {
         limit: 10,
       });
       const searchResultsArray = await searchResults.toArray();
-      console.log("Search Results:", searchResultsArray);
+      // console.log("Search Results:", searchResultsArray);
       if (!Array.isArray(searchResultsArray)) {
         throw new Error("AstraDB query did not return an array.");
       }
@@ -70,7 +77,7 @@ export async function POST(request) {
       // Construct AI prompt using retrieved data
       const docsMap = searchResultsArray?.map((doc) => doc.text);
       docContext = JSON.stringify(docsMap);
-      console.log(docContext);
+      // console.log(docContext);
     } catch (error) {
       console.log("Error:", error);
       return NextResponse.json(
@@ -94,7 +101,6 @@ export async function POST(request) {
       model: "gemini-2.0-flash",
       systemInstruction,
     });
-    // const chat = extendedModel.startChat({ history });
     const result = await extendedModel.generateContent(universalMessage);
     const responseText = result.response.text();
 

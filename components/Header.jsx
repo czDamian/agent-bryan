@@ -5,6 +5,9 @@ const Header = () => {
     <div className="flex p-2 font-bold bg-gray-950 gap-2 justify-center items-center">
       <div>Agent Bryan</div>
       <div className="flex gap-2">
+        <Link href="/" className="underline">
+          Home
+        </Link>
         <Link href="/chat" className="underline">
           Chat
         </Link>

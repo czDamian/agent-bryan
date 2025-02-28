@@ -33,7 +33,6 @@ const PersonalizedBlueprint = () => {
   const onSubmit = async (formData) => {
     console.log("User Data:", formData);
     setStatus("");
-
     setLoading(true);
 
     try {
@@ -41,6 +40,7 @@ const PersonalizedBlueprint = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: formData }),
+        credentials: "include",
       });
 
       const responseData = await response.json(); // Fix variable name
