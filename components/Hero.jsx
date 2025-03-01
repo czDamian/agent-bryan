@@ -28,21 +28,21 @@ const Hero = () => {
           />
         </div>
       </div>
-      <div className="text-center my-16 ">
+      <div className="text-center py-16 ">
         <Link
           href="/personalize"
-          className="bg-[#8F788D] hover:bg-[#7e6a7c] text-lg text-white px-12 py-3 rounded-xl"
+          className="bg-[#8F788D] hover:bg-[#7e6a7c] text-lg text-white px-12 py-3 rounded-full"
         >
           Start your personalized plan
         </Link>
       </div>
       <div className="bg-[#BE98A2] text-white px-4">
-        <div className="text-4xl p-8 text-center">
-          <div>Experience the</div>
+        <div className="text-4xl p-8  text-center">
+          <div className="mt-12">Experience the</div>
           <div>benefit of using</div>
           <div>Agent Brayann</div>
         </div>
-        <p className="text-justify px-12">
+        <p className="mx-auto mt-8 max-w-md text-center">
           Unlock the full potential of usingkk kkkkkkkkk kkkkk kkkhhhhhh nhhdjdt
           jfyjfykkkkkkkk kkkkkkkkkk kkkkkkkkk kkkk kkkkkkkkkmj hhddjjj jjjjjjjj
           jjjjjjjj jjjjjjjjjj jjjjjruy iirtetet eoiero wertiortiriot

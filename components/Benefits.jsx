@@ -9,6 +9,7 @@ const cardData = [
       "AI-curated nutrition recommendations based on your goals and preferences. Get tailored meal plans to optimize your health and energy.",
     link: "#",
     icon: "🍽️",
+    button: "Learn More",
   },
   {
     title: "Smart Fitness Guidance",
@@ -38,7 +39,7 @@ const cardData = [
 
 export default function Benefits() {
   return (
-    <div className="flex flex-col m-4 gap-6 p-6 items-center">
+    <div className="flex flex-col gap-6 p-6 py-16 items-center">
       {cardData.map((card, index) => (
         <div
           key={index}
