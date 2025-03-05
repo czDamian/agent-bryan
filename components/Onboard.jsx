@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 // Schema for Login Form
 const loginSchema = z.object({
@@ -149,6 +150,11 @@ const Onboard = () => {
           ? "Already have an account? Login"
           : "Don't have an account? Register"}
       </button>
+      <div>
+        <Link href="/" className="text-white underline text-sm">
+          Back home
+        </Link>
+      </div>
     </div>
   );
 };

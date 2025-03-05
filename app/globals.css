@@ -7,5 +7,5 @@ body {
 }
 
 input {
-  @apply outline-none bg-light-pink-50 border-none active:outline-none  focus:outline-none text-black;
+  @apply outline-none bg-light-pink-50  active:outline-none  focus:outline-none text-black;
 }

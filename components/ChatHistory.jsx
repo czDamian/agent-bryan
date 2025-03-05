@@ -90,7 +90,7 @@ const ChatHistory = () => {
   return (
     <div>
       <Sidebar />
-      <div className="max-w-lg mx-auto flex flex-col h-[90vh] p-6 ">
+      <div className="max-w-lg border mx-auto flex flex-col p-6 ">
         {loading ? (
           <div className="flex items-center justify-center">
             <AiOutlineLoading3Quarters className="animate-spin text-3xl" />
@@ -98,7 +98,7 @@ const ChatHistory = () => {
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : history.length > 0 ? (
-          <div className="flex-1 overflow-y-auto space-y-4 p-4">
+          <div className="flex-1 overflow-y-auto space-y-4 p-4 mb-20">
             {history.map((message, index) => (
               <div
                 key={index}
@@ -125,25 +125,25 @@ const ChatHistory = () => {
           <p className="text-gray-400">No chat history found.</p>
         )}
         {/* Input & Send Button */}
-        <div className="flex items-center gap-2 p-4 bg-light-pink-50 rounded-lg">
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-lg bg-light-pink-50 py-6 px-4 flex items-center gap-2 rounded-t-2xl shadow-md">
           <input
             type="text"
             placeholder="Who is the author of the “Don’t Die Blueprint”?"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 bg-transparent outline-none"
+            className="flex-1 bg-transparent outline-none text-gray-700 placeholder-gray-400"
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             autoFocus
           />
           <button
             onClick={sendMessage}
             disabled={loading}
-            className="p-2 bg-light-pink-50 rounded-full hover:bg-light-pink-200"
+            className="p-2 bg-light-pink-100 rounded-full hover:bg-light-pink-200 transition"
           >
             {loading ? (
-              <AiOutlineLoading3Quarters className="animate-spin" />
+              <AiOutlineLoading3Quarters className="animate-spin text-gray-600" />
             ) : (
-              <AiOutlineSend />
+              <AiOutlineSend className="text-gray-700" />
             )}
           </button>
         </div>

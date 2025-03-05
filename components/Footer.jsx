@@ -18,16 +18,16 @@ const Footer = () => {
         </div>
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-2">Company</h3>
+        <h3 className="text-lg font-semibold mb-2">Links</h3>
         <div className="flex flex-col gap-1">
-          <Link href="#" className="hover:underline">
-            News & Update
+          <Link href="/onboard" className="hover:underline">
+            Login or Sign Up
           </Link>
-          <Link href="#" className="hover:underline">
-            About us
+          <Link href="/chat" className="hover:underline">
+            Chat
           </Link>
-          <Link href="#" className="hover:underline">
-            Careers
+          <Link href="/personalize" className="hover:underline">
+            Personalize Blueprint
           </Link>
         </div>
       </div>

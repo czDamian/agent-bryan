@@ -7,7 +7,7 @@ const cardData = [
     title: "Personalized Meal Plans",
     description:
       "AI-curated nutrition recommendations based on your goals and preferences. Get tailored meal plans to optimize your health and energy.",
-    link: "#",
+    link: "/personalize",
     icon: "🍽️",
     button: "Learn More",
   },
@@ -15,7 +15,7 @@ const cardData = [
     title: "Smart Fitness Guidance",
     description:
       "Tailored workouts and activity tracking powered by AI to help you stay on track and improve your fitness with every step.",
-    link: "#",
+    link: "/chat",
     icon: "🏋️",
     button: "Learn More",
   },
@@ -23,7 +23,7 @@ const cardData = [
     title: "Health Insight and Analysis",
     description:
       "AI-curated nutrition recommendations based on your goals and preferences. Get tailored meal plans to optimize your health and energy",
-    link: "#",
+    link: "/personalize",
     icon: "🍽️",
     button: "Learn More",
   },
@@ -31,7 +31,7 @@ const cardData = [
     title: "Integration",
     description:
       "AI-curated nutrition recommendations based on your goals and preferences. Get tailored meal plans to optimize your health and energy",
-    link: "#",
+    link: "/onboard",
     icon: "🏋️",
     button: "Get Started",
   },

@@ -43,11 +43,7 @@ const Hero = () => {
           <div>Agent Brayann</div>
         </div>
         <p className="mx-auto mt-8 max-w-md text-center">
-          Unlock the full potential of usingkk kkkkkkkkk kkkkk kkkhhhhhh nhhdjdt
-          jfyjfykkkkkkkk kkkkkkkkkk kkkkkkkkk kkkk kkkkkkkkkmj hhddjjj jjjjjjjj
-          jjjjjjjj jjjjjjjjjj jjjjjruy iirtetet eoiero wertiortiriot
-          riotertioorero eoirgjeeertroit rtoitt ofkdg ggogoero iggihgio gooogo
-          rige rgiu rgrui
+        Brayann AI delivers a seamless, personalized crypto experience. Get tailored insights, real-time security alerts, and interactive learning with earning opportunities. Its intuitive design makes crypto education engaging and rewarding, helping you make smarter, safer decisionsi
         </p>
         <Benefits />
       </div>

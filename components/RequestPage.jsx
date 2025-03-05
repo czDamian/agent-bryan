@@ -45,11 +45,11 @@ const RequestPage = () => {
   return (
     <div>
       <Sidebar />
-      <div className="max-w-lg mx-auto flex flex-col h-[90vh] p-6 bg-gray-900 text-white">
+      <div className="max-w-lg mx-auto flex flex-col h-[90vh] p-6  text-black">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <h2 className="text-2xl font-bold">Hi, am Agent Bryan</h2>
-            <p className="text-gray-400 mt-2">
+            <p className="text-neutral-800 mt-2">
               Ask me anything about the “Don’t Die Blueprint” and I will do my
               best to assist you.
             </p>
@@ -64,8 +64,10 @@ const RequestPage = () => {
                 }`}
               >
                 <div
-                  className={`p-3 max-w-[80%] rounded-lg ${
-                    msg.role === "user" ? "bg-blue-600" : "bg-gray-700"
+                  className={`p-3 max-w-[80%] rounded-lg  selection:text-light-pink-50 selection:bg-dark-pink-100 ${
+                    msg.role === "user"
+                      ? "bg-light-pink-50"
+                      : "bg-light-pink-200"
                   }`}
                 >
                   <ReactMarkdown>{msg.parts[0].text}</ReactMarkdown>
@@ -76,20 +78,20 @@ const RequestPage = () => {
         )}
 
         {/* Input & Send Button */}
-        <div className="flex items-center gap-2 p-4 bg-gray-800 rounded-lg">
+        <div className="flex items-center gap-2 p-4 bg-light-pink-50 rounded-lg">
           <input
             type="text"
             placeholder="Who is the author of the “Don’t Die Blueprint”?"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-white placeholder-gray-400"
+            className="flex-1 bg-transparent outline-none placeholder-gray-400"
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             autoFocus
           />
           <button
             onClick={sendMessage}
             disabled={loading}
-            className="p-2 bg-green-600 rounded-full hover:bg-green-700"
+            className="p-2 bg-light-pink-50 rounded-full hover:bg-light-pink-200"
           >
             {loading ? (
               <AiOutlineLoading3Quarters className="animate-spin" />
