@@ -81,7 +81,7 @@ const PersonalizedBlueprint = () => {
   };
 
   return (
-    <div className="bg-[#262323] h-[100vh] py-20">
+    <div className="bg-[#262323] h-[120vh] min-h-max px-4  py-20">
       <div className="max-w-lg mx-auto p-6 bg-[#262323] border border-light-pink-100 text-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Customize your AI Experience
@@ -131,7 +131,9 @@ const PersonalizedBlueprint = () => {
           {step === 1 && (
             <>
               <div>
-                <label className="block mb-1">Diet</label>
+                <label className="block mb-1">
+                  What food do you normally eat?
+                </label>
                 <p className="pl-2 text-sm mb-2">
                   Knowing what you typically eat helps to identify potential
                   areas for improvement or if there are there any foods that
@@ -148,11 +150,13 @@ const PersonalizedBlueprint = () => {
               </div>
 
               <div>
-                <label className="block mb-1">Activity Level</label>
+                <label className="block mb-1">
+                  What Physical Exercises do you do?
+                </label>
                 <p className="pl-2 text-sm mb-2">
-                  Understanding how active you are helps me determine the right
-                  exercise recommendations. Are you already very active, or are
-                  you just starting out?
+                  Understanding how physically active you are helps to determine
+                  the right exercise recommendations. Are you already working
+                  out, or are you just starting out?
                 </p>
                 <input
                   type="text"
@@ -171,7 +175,9 @@ const PersonalizedBlueprint = () => {
           {/* Step 3: Health Goals */}
           {step === 2 && (
             <div>
-              <label className="block mb-1">Health Goals</label>
+              <label className="block mb-1">
+                What Health Goals do you want to achieve?
+              </label>
               <p className="pl-2 text-sm mb-2">
                 Eg: Weight Management, Fitness & Physical Activity, Nutrition,
                 Sleep, Stress Management & Mental Wellbeing, Longevity &
@@ -265,7 +271,7 @@ const StatusModal = ({ status, onClose }) => {
           Here is Your Personalized Blueprint Result
         </h2>
         <ReactMarkdown>{status}</ReactMarkdown>
-        <div className=" flex gap-4 justify-between my-2">
+        <div className=" flex  gap-4 justify-between my-2">
           <button
             onClick={handleDownloadPDF}
             className="bg-[#D180AC] py-2 px-4 rounded hover:bg-[#c97fa7] transition"
@@ -274,7 +280,7 @@ const StatusModal = ({ status, onClose }) => {
           </button>
           <button
             onClick={onClose}
-            className="bg-[#262323]  py-2 px-4 rounded hover:bg-[#8F788D] transition"
+            className="bg-[#262323] py-2 px-4 rounded hover:bg-[#8F788D] transition"
           >
             Close
           </button>

@@ -45,7 +45,7 @@ const RequestPage = () => {
   return (
     <div>
       <Sidebar />
-      <div className="max-w-lg mx-auto flex flex-col h-[90vh] p-6  text-black">
+      <div className="max-w-lg mx-auto flex flex-col h-[100vh] p-6  text-black justify-end ">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <h2 className="text-2xl font-bold">Hi, am Agent Bryan</h2>
@@ -78,7 +78,7 @@ const RequestPage = () => {
         )}
 
         {/* Input & Send Button */}
-        <div className="flex items-center gap-2 p-4 bg-light-pink-50 rounded-lg">
+        <div className="flex items-center gap-2 p-4 bg-light-pink-50 rounded-lg ">
           <input
             type="text"
             placeholder="Who is the author of the “Don’t Die Blueprint”?"

@@ -7,12 +7,12 @@ const Hero = () => {
   return (
     <section className=" bg-light-pink-50">
       <div className="bg-[#BD99A2] w-full ">
-        <h1 className="bg-[#EFE6EA] text-xl md:text-3xl font-coolvetica text-center py-4 px-12 mx-16 tracking-wider">
+        <h1 className="bg-[#EFE6EA] text-xl sm:text-2xl md:text-3xl font-coolvetica text-center py-4 px-12 mx-16 tracking-wider">
           Agent Bryan
         </h1>
       </div>
       <div className="relative px-4">
-        <div className="text-3xl md:text-4xl mb-96 flex gap-3 flex-col text-[#d180ac] mt-16 font-coolvetica">
+        <div className="text-3xl md:text-4xl mb-96 flex gap-3 flex-col text-[#d180ac] mt-16 font-coolvetica md:font-semibold">
           <div>Unlock Your</div>
           <div>Health Potential</div>
           <div>With AI-Powered</div>
