@@ -4,10 +4,11 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
 import { FiLogOut } from "react-icons/fi";
 import { BiMessageAdd } from "react-icons/bi";
-
+import { useRouter } from "next/navigation";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [history, setHistory] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -25,6 +26,35 @@ const Sidebar = () => {
     };
     fetchHistory();
   }, []);
+
+  async function logout() {
+    try {
+      const response = await fetch("/api/onboard", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "logout",
+        }),
+        credentials: "include",
+      });
+
+      const result = await response.json();
+      if (result?.message === "Logout successful") {
+        setTimeout(() => {
+          router.push("/onboard");
+        }, 30000);
+      }
+
+      if (!response.ok) {
+        throw new Error(result.error || "Logout failed");
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+    }
+  }
 
   return (
     <div className="">
@@ -53,19 +83,22 @@ const Sidebar = () => {
           <div className="flex flex-col space-between justify-between min-h-[80vh]">
             <ul>
               <h2 className="text-xl font-semibold mb-4">Recent Chats</h2>
-              {history.map((chat) => (
-                <li key={chat._id} className="">
-                  <Link
-                    href={`/c/${chat._id}`}
-                    className="block  py-2 px-6 hover:bg-light-pink-100 rounded-md capitalize"
-                  >
-                    {chat.messages.length > 0
-                      ? chat.messages[0].msg.split(" ").slice(0, 3).join(" ") +
-                        " ..."
-                      : "Untitled Chat"}
-                  </Link>
-                </li>
-              ))}
+              {history.length >= 0 &&
+                history.map((chat) => (
+                  <li key={chat._id} className="">
+                    <Link
+                      href={`/c/${chat._id}`}
+                      className="block  py-2 px-6 hover:bg-light-pink-100 rounded-md capitalize"
+                    >
+                      {chat.messages.length > 0
+                        ? chat.messages[0].msg
+                            .split(" ")
+                            .slice(0, 3)
+                            .join(" ") + " ..."
+                        : "Untitled Chat"}
+                    </Link>
+                  </li>
+                ))}
             </ul>
             <div>
               <div className="flex flex-col gap-2">
@@ -75,13 +108,13 @@ const Sidebar = () => {
                 >
                   Personalize
                 </Link>
-                <Link
-                  href="/"
-                  className="hover:bg-light-pink-100  py-2 px-2 rounded-md"
+                <div
+                  onClick={logout}
+                  className="hover:bg-light-pink-100  py-2 px-2 rounded-md cursor-pointer"
                 >
                   <FiLogOut className="inline mr-2" />
                   Sign Out
-                </Link>
+                </div>
               </div>
             </div>
           </div>

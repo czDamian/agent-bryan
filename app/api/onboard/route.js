@@ -1,3 +1,4 @@
+//for login, register and logout
 import { NextResponse } from "next/server";
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import bcrypt from "bcryptjs";
@@ -18,9 +19,30 @@ const db = client.db(ASTRA_DB_API_ENDPOINT, { namespace: ASTRA_DB_NAMESPACE });
 const usersCollection = db.collection(ASTRA_DB_USER_COLLECTION);
 
 export async function POST(request) {
+  console.log("request in progress");
   try {
     const { name, email, password, type } = await request.json();
 
+    if (type === "logout") {
+      console.log("trying to logout");
+      const cookie = serialize("token", "", {
+        httpOnly: true,
+        sameSite: "Strict",
+        path: "/",
+        expires: new Date(0), // Expire the cookie
+      });
+
+      return NextResponse.json(
+        { message: "Logout successful" },
+        {
+          status: 200,
+          headers: {
+            "Set-Cookie": cookie,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
     if (!email || !password)
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -110,4 +132,8 @@ export async function POST(request) {
       { status: 500 }
     );
   }
+}
+
+export async function GET() {
+  return NextResponse.json({ message: "Nothing" }, { status: 200 });
 }

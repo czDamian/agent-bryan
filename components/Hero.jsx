@@ -30,10 +30,10 @@ const Hero = () => {
       </div>
       <div className="text-center py-16 ">
         <Link
-          href="/personalize"
-          className="bg-[#8F788D] hover:bg-[#7e6a7c] text-lg text-white px-12 py-3 rounded-full"
+          href="/onboard"
+          className="bg-[#8F788D] hover:bg-[#7e6a7c] text-lg text-white px-20 py-3 rounded-full"
         >
-          Start your personalized plan
+          Get Started
         </Link>
       </div>
       <div className="bg-[#BE98A2] text-white px-4">
@@ -43,7 +43,11 @@ const Hero = () => {
           <div>Agent Brayann</div>
         </div>
         <p className="mx-auto mt-8 max-w-md text-center">
-        Brayann AI delivers a seamless, personalized crypto experience. Get tailored insights, real-time security alerts, and interactive learning with earning opportunities. Its intuitive design makes crypto education engaging and rewarding, helping you make smarter, safer decisionsi
+          Brayann AI delivers a seamless, personalized crypto experience. Get
+          tailored insights, real-time security alerts, and interactive learning
+          with earning opportunities. Its intuitive design makes crypto
+          education engaging and rewarding, helping you make smarter, safer
+          decisionsi
         </p>
         <Benefits />
       </div>
