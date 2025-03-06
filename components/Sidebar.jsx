@@ -42,9 +42,7 @@ const Sidebar = () => {
 
       const result = await response.json();
       if (result?.message === "Logout successful") {
-        setTimeout(() => {
-          router.push("/onboard");
-        }, 30000);
+        router.push("/onboard");
       }
 
       if (!response.ok) {
@@ -102,6 +100,12 @@ const Sidebar = () => {
             </ul>
             <div>
               <div className="flex flex-col gap-2">
+                <Link
+                  href="/"
+                  className="hover:bg-light-pink-100  py-2 px-2 rounded-md"
+                >
+                  Home
+                </Link>
                 <Link
                   href="/personalize"
                   className="hover:bg-light-pink-100  py-2 px-2 rounded-md"

@@ -14,7 +14,7 @@ const cardData = [
   {
     title: "Smart Fitness Guidance",
     description:
-      "Tailored workouts and activity tracking powered by AI to help you stay on track and improve your fitness with every step.",
+      "Get a well tailored workouts and activity tracking powered by AI to help you stay on track and improve your fitness with every step.",
     link: "/chat",
     icon: "🏋️",
     button: "Learn More",
@@ -39,7 +39,7 @@ const cardData = [
 
 export default function Benefits() {
   return (
-    <div className="flex flex-col gap-6 p-6 py-16 items-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 py-16 place-content-center place-items-center">
       {cardData.map((card, index) => (
         <div
           key={index}

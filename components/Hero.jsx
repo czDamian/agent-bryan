@@ -27,6 +27,15 @@ const Hero = () => {
             className="w-80 absolute top-20 right-[-5]"
           />
         </div>
+        {/* <div>
+          <Image
+            src="/hero-bg-2.png"
+            height={1000}
+            width={1000}
+            alt="hero-brain"
+            className="w-80 absolute top-20 right-[-5] z-50 hidden md:block"
+          />
+        </div> */}
       </div>
       <div className="text-center py-16 ">
         <Link
