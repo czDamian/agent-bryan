@@ -7,12 +7,12 @@ const Hero = () => {
   return (
     <section className=" bg-light-pink-50">
       <div className="bg-[#BD99A2] w-full ">
-        <h1 className="bg-[#EFE6EA] text-3xl font-coolvetica text-center py-4 px-12 mx-16 tracking-wider">
+        <h1 className="bg-[#EFE6EA] text-xl md:text-3xl font-coolvetica text-center py-4 px-12 mx-16 tracking-wider">
           Agent Bryan
         </h1>
       </div>
       <div className="relative px-4">
-        <div className="text-4xl mb-96 flex gap-3 flex-col text-[#d180ac] mt-16 font-semibold font-coolvetica">
+        <div className="text-3xl md:text-4xl mb-96 flex gap-3 flex-col text-[#d180ac] mt-16 font-coolvetica">
           <div>Unlock Your</div>
           <div>Health Potential</div>
           <div>With AI-Powered</div>
@@ -24,7 +24,7 @@ const Hero = () => {
             height={1000}
             width={1000}
             alt="hero-brain"
-            className="w-80 absolute top-20 right-[-5]"
+            className="w-80 absolute  top-20 right-[-5]"
           />
         </div>
         {/* <div>
@@ -49,7 +49,7 @@ const Hero = () => {
         <div className="text-4xl p-8  text-center">
           <div className="mt-12">Experience the</div>
           <div>benefit of using</div>
-          <div>Agent Brayann</div>
+          <div>Agent Bryan</div>
         </div>
         <p className="mx-auto mt-8 max-w-md text-center">
           Brayann AI delivers a seamless, personalized crypto experience. Get
