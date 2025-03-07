@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-b min-h-[100vh] from-light-pink-100 to-dark-pink-100 m-0 p-0 font-rubik;
+  @apply bg-gradient-to-b min-h-[100vh] from-light-pink-100 to-dark-pink-100 m-0 p-0 font-rubik box-border;
 }
 
 input {
