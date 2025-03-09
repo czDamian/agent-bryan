@@ -102,7 +102,7 @@ Open your browser and navigate to http://localhost:3000
 5. Generate your personalized blueprint
 
 ## Architecture
-
+```bash
 ┌───────────────┐      ┌───────────────┐      ┌───────────────┐
 │   Frontend    │◄────►│    Backend    │◄────►│   Database    │
 │  React App    │      │   Node.js     │      │   AstraDb     │
@@ -114,7 +114,7 @@ Open your browser and navigate to http://localhost:3000
         │   Gemini API  │ │  Health Data  │ │     Data      │
         │               │ │     APIs      │ │   Analytics   │
         └───────────────┘ └───────────────┘ └───────────────┘
-
+```
 ## Meet The Team
 
 Damian Olebuezie - AI Engineer
