@@ -1,50 +1,122 @@
 # Agent One
 
-Hi, I am Agent One
+An AI-powered agent that introduces users to Bryan Johnson's "Don't Die Blueprint" and generates personalized longevity blueprints.
 
-datastax
-tailwindcss
-gemini
+![Agent One Logo](https://placeholder-for-your-logo.com/logo.png)
 
-DETAILS
+## About
 
-Bounty Description:
+Agent One is an open-source AI assistant developed for the [DDoraHacks Hackathon Bounty #999](https://dorahacks.io/hackathon/bounty/999). It helps users understand the principles of Bryan Johnson's approach to longevity and creates personalized "Don't Die Blueprints" based on individual health data and goals.
 
-Create an AI-powered agent that introduces users to Bryan Johnson’s “Don’t Die Blueprint” and generates personalized blueprints based on user-provided data. The agent should help users understand the principles of Bryan Johnson’s approach to longevity and offer actionable insights tailored to their individual needs.
+## Features
 
-Deliverables:
+- **Interactive AI Agent**
 
-    Interactive AI Agent:
+  - Simple explanations of Bryan Johnson's "Don't Die Blueprint"
+  - Q&A capability for longevity-related questions
+  - Evidence-based insights about longevity practices
 
-The agent should:
+- **Personalized Blueprint Generator**
 
-    Explain Bryan Johnson’s “Don’t Die Blueprint” in simple terms.
-    Engage users by answering questions about the blueprint.
-    Provide relevant insights about longevity practices.
+  - Custom recommendations based on user profiles (age, diet, activity level, health goals)
+  - Adaptation of the blueprint principles to individual circumstances
+  - Actionable insights tailored to user needs
 
-    Personalized Blueprint:
+- **Health Tracker Integration**
 
-    Using user-provided data (e.g., age, diet, activity level, health goals), the agent should:
-    Generate a personalized version of the “Don’t Die Blueprint.”
-    Offer recommendations that align with the user’s health and lifestyle.
+  - Optional connections to wearable devices and fitness apps
+  - API integrations for real-time health data processing
+  - Data visualization of health metrics over time
 
-    Integration Features:
+- **Exportable Reports**
+  - PDF download option for personalized blueprints
+  - Shareable format for healthcare providers
+  - Progress tracking and milestone achievements
 
-    Optionally integrate with health trackers or APIs (e.g., wearable devices, fitness apps) to improve personalization.
-    Provide downloadable reports or suggestions in a user-friendly format.
+## Technologies Used
 
-    Open-Source Codebase:
+- **Frontend**: React, Tailwind CSS
+- **Backend**: Node.js, NextKs
+- **AI/ML**: Gemini API, TensorFlow.js
+- **Data Storage**: AstraDB
+- **Integration**: Health Kit API, Google Fit API, Fitbit API
+- **Deployment**: Docker, AWS/GCP
 
-    The project must be open-source and published on GitHub with clear documentation for setup and usage.
+## Installation
 
-Evaluation Criteria:
+### Prerequisites
 
-Submissions will be judged on the following factors:
+- Node.js (v16.0 or higher)
+- npm or yarn
+- AstraDB (local or Atlas account)
+- AstraDB API key
 
-    Functionality: How well the agent explains the “Don’t Die Blueprint” and generates personalized recommendations.
-    Accuracy: The alignment of generated blueprints with Bryan Johnson’s principles.
-    User Experience: Simplicity and effectiveness of user interaction.
-    Scalability: Potential for integration with other tools or platforms.
-    Documentation: Clear instructions on how to use and deploy the agent.
+### Setup
 
-Resources: Website - https://blueprint.bryanjohnson.com/
+1. Clone the repository
+
+```bash
+git clone https://github.com/czDamian/agent-one.git
+cd agent-one
+```
+
+### Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### Configure environment variables
+
+```bash
+cp .env.example .env
+# Edit .env with your API keys and database connection string
+```
+### Start the development server
+```bash
+npm run dev
+# or
+yarn dev
+
+```
+
+### Open Browser
+
+Open your browser and navigate to http://localhost:3000
+
+### Usage
+#### Basic Interaction
+
+1. Create an account or log in
+2. Chat with the AI agent
+3. Explore the "Personalize Blueprint" explanation section
+4. Ask questions about the blueprint or longevity practices
+5. Generate your personalized blueprint
+
+
+
+## Architecture
+
+┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+│ Frontend │◄────►│ Backend │◄────►│ Database │
+│ React App │ │ Node.js │ │ AstraDB │
+└───────────────┘ └───────┬───────┘ └───────────────┘
+│
+┌─────────────┼─────────────┐
+│ │ │
+┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+│ Gemini API │ │ Health Data │ │ Data │
+│ │ │ APIs │ │ Analytics │
+└───────────────┘ └───────────────┘ └───────────────┘
+
+
+## Meet The Team
+
+Damian Olebuezie - AI Engineer
+Stephanie - UI/UX Designer
+Damian Olebuezie - Frontend and Backend Developer
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.

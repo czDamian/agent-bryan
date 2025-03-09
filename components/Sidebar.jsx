@@ -2,12 +2,14 @@
 import { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
-import { FiLogOut } from "react-icons/fi";
 import { BiMessageAdd } from "react-icons/bi";
+import { FaCircleUser } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
+
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [history, setHistory] = useState([]);
+  const [userEmail, setUserEmail] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -20,6 +22,8 @@ const Sidebar = () => {
         });
         const data = await response.json();
         setHistory(data.history || []);
+        console.log("data user sidbar", data?.history[0]?.userId);
+        setUserEmail(data?.history[0]?.userId);
       } catch (error) {
         console.error("Error fetching chat history:", error);
       }
@@ -114,9 +118,10 @@ const Sidebar = () => {
                 </Link>
                 <div
                   onClick={logout}
+                  title={userEmail}
                   className="hover:bg-light-pink-100  py-2 px-2 rounded-md cursor-pointer"
                 >
-                  <FiLogOut className="inline mr-2" />
+                  <FaCircleUser className="inline pr-2" size={28} />
                   Sign Out
                 </div>
               </div>

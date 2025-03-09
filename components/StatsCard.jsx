@@ -24,11 +24,11 @@ const StatsCard = () => {
   ];
 
   return (
-    <div className="flex mx-auto max-w-xl w-max flex-col sm:flex-row gap-4 sm:gap-2 md:gap-4 py-8">
+    <div className="flex mx-auto max-w-xl w-max flex-col sm:flex-row gap-4 sm:gap-2 md:gap-4 py-8 ">
       {statsData.map((stat) => (
         <div
           key={stat.id}
-          className="min-w-[200px] md:min-w-[250px]  flex-1 bg-gradient-to-b from-[#484245]  to-[#774F65] bg-opacity-80 p-6 flex flex-col items-start text-white border-r border-[#774F65] last:border-r-0"
+          className=" flex-1 bg-gradient-to-b from-[#484245]  to-[#774F65] bg-opacity-80 px-4 py-4 flex flex-col items-start justify-center text-white border-r border-[#774F65] last:border-r-0"
         >
           <div className="mb-2 p-1 bg-white bg-opacity-10 rounded">
             {stat.icon}

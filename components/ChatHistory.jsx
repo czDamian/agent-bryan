@@ -27,7 +27,6 @@ const ChatHistory = () => {
       });
 
       const data = await response.json();
-      console.log("data message arry", data.history[0].messages);
 
       if (!response.ok) {
         throw new Error(data.error || "Failed to fetch chat history");
@@ -90,7 +89,7 @@ const ChatHistory = () => {
   return (
     <div>
       <Sidebar />
-      <div className="max-w-lg border mx-auto flex flex-col p-6 ">
+      <div className="max-w-lg mx-auto flex flex-col p-6 ">
         {loading ? (
           <div className="flex items-center justify-center">
             <AiOutlineLoading3Quarters className="animate-spin text-3xl" />
