@@ -1,12 +1,12 @@
-# Agent One
+# Agent Bryan
 
 An AI-powered agent that introduces users to Bryan Johnson's "Don't Die Blueprint" and generates personalized longevity blueprints.
 
-![Agent One Logo](https://placeholder-for-your-logo.com/logo.png)
+![Logo](/hdLogo.png)
 
-## About
+## About The Project
 
-Agent One is an open-source AI assistant developed for the [DDoraHacks Hackathon Bounty #999](https://dorahacks.io/hackathon/bounty/999). It helps users understand the principles of Bryan Johnson's approach to longevity and creates personalized "Don't Die Blueprints" based on individual health data and goals.
+Agent One is an open-source AI Agent developed to help users understand the principles of Bryan Johnson's approach to longevity and creates personalized "Don't Die Blueprints" based on individual health data and goals.
 
 ## Features
 
@@ -22,25 +22,16 @@ Agent One is an open-source AI assistant developed for the [DDoraHacks Hackathon
   - Adaptation of the blueprint principles to individual circumstances
   - Actionable insights tailored to user needs
 
-- **Health Tracker Integration**
-
-  - Optional connections to wearable devices and fitness apps
-  - API integrations for real-time health data processing
-  - Data visualization of health metrics over time
-
 - **Exportable Reports**
   - PDF download option for personalized blueprints
   - Shareable format for healthcare providers
-  - Progress tracking and milestone achievements
 
 ## Technologies Used
 
 - **Frontend**: React, Tailwind CSS
-- **Backend**: Node.js, NextKs
-- **AI/ML**: Gemini API, TensorFlow.js
+- **Backend**: Node.js, NextJs
+- **AI/ML**: Gemini API
 - **Data Storage**: AstraDB
-- **Integration**: Health Kit API, Google Fit API, Fitbit API
-- **Deployment**: Docker, AWS/GCP
 
 ## Installation
 
@@ -56,7 +47,7 @@ Agent One is an open-source AI assistant developed for the [DDoraHacks Hackathon
 1. Clone the repository
 
 ```bash
-git clone https://github.com/czDamian/agent-one.git
+git clone https://github.com/czDamian/agent-bryan
 cd agent-one
 ```
 
@@ -73,8 +64,22 @@ yarn install
 ```bash
 cp .env.example .env
 # Edit .env with your API keys and database connection string
+
+GEMINI_API_KEY = " "
+ASTRA_DB_API_ENDPOINT = ""
+
+ASTRA_DB_APPLICATION_TOKEN= ""
+ASTRA_DB_NAMESPACE = ""
+ASTRA_DB_COLLECTION = ""
+ASTRA_DB_USER_COLLECTION = ""
+ASTRA_DB_CHAT_HISTORY_COLLECTION = ""
+JWT_SECRET=""
+
+
 ```
+
 ### Start the development server
+
 ```bash
 npm run dev
 # or
@@ -87,6 +92,7 @@ yarn dev
 Open your browser and navigate to http://localhost:3000
 
 ### Usage
+
 #### Basic Interaction
 
 1. Create an account or log in
@@ -95,22 +101,19 @@ Open your browser and navigate to http://localhost:3000
 4. Ask questions about the blueprint or longevity practices
 5. Generate your personalized blueprint
 
-
-
 ## Architecture
 
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│ Frontend │◄────►│ Backend │◄────►│ Database │
-│ React App │ │ Node.js │ │ AstraDB │
-└───────────────┘ └───────┬───────┘ └───────────────┘
-│
-┌─────────────┼─────────────┐
-│ │ │
-┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│ Gemini API │ │ Health Data │ │ Data │
-│ │ │ APIs │ │ Analytics │
-└───────────────┘ └───────────────┘ └───────────────┘
-
+┌───────────────┐      ┌───────────────┐      ┌───────────────┐
+│   Frontend    │◄────►│    Backend    │◄────►│   Database    │
+│  React App    │      │   Node.js     │      │   AstraDb     │
+└───────────────┘      └───────┬───────┘      └───────────────┘
+                              │
+                ┌─────────────┼─────────────┐
+                │             │             │
+        ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
+        │   Gemini API  │ │  Health Data  │ │     Data      │
+        │               │ │     APIs      │ │   Analytics   │
+        └───────────────┘ └───────────────┘ └───────────────┘
 
 ## Meet The Team
 
@@ -119,4 +122,5 @@ Stephanie - UI/UX Designer
 Damian Olebuezie - Frontend and Backend Developer
 
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
