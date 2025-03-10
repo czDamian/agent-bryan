@@ -11,6 +11,7 @@ const ChatHistory = () => {
   const [history, setHistory] = useState([]);
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState([]);
+  const [limitReached, setLimitReached] = useState("");
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -55,6 +56,7 @@ const ChatHistory = () => {
 
   const sendMessage = async () => {
     if (!query.trim()) return;
+    setLimitReached("");
 
     const userMessage = { role: "user", parts: [{ text: query }] };
     const updatedMessages = [...messages, userMessage];
@@ -76,11 +78,22 @@ const ChatHistory = () => {
 
       const data = await response.json();
 
+      // Check if the response contains an error
+      if (!response.ok) {
+        // Check if the user has reached message limit for each chat
+        if (data.limitReached) {
+          setLimitReached(
+            "Message limit for this chat has been exceeded, consider starting a new chat"
+          );
+        }
+        return;
+      }
+
       const aiMessage = { role: "model", parts: [{ text: data.message }] };
       setMessages([...updatedMessages, aiMessage]);
       fetchChatHistory();
     } catch (error) {
-      console.error("Chat error:", error);
+      console.error("Network error:", error);
     } finally {
       setLoading(false);
     }
@@ -89,13 +102,13 @@ const ChatHistory = () => {
   return (
     <div>
       <Sidebar />
-      <div className="max-w-lg mx-auto flex flex-col p-6 ">
+      <div className="max-w-lg md:max-w-xl lg:max-w-2xl  mx-auto flex flex-col p-6 ">
         {loading ? (
           <div className="flex items-center justify-center">
-            <AiOutlineLoading3Quarters className="animate-spin text-3xl" />
+            {/* loading text if needed */}
           </div>
         ) : error ? (
-          <p className="text-red-500">{error}</p>
+          <p className="text-white p-12">{error}</p>
         ) : history.length > 0 ? (
           <div className="flex-1 overflow-y-auto space-y-4 p-4 mb-20">
             {history.map((message, index) => (
@@ -123,8 +136,15 @@ const ChatHistory = () => {
         ) : (
           <p className="text-gray-400">No chat history found.</p>
         )}
+
+        {/* display error message if limit has been reached */}
+        {limitReached && (
+          <div className="fixed max-w-lg top-12 right-4 bg-light-pink-200 text-black px-4 py-3 rounded shadow-lg animate-[slide-in-right_0.5s_ease-out,fade-out_0.5s_ease-in_2.5s_forwards]">
+            {limitReached}
+          </div>
+        )}
         {/* Input & Send Button */}
-        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-lg bg-light-pink-50 py-6 px-4 flex items-center gap-2 rounded-t-2xl shadow-md">
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-lg md:max-w-xl lg:max-w-2xl bg-light-pink-50 py-6 px-4 flex items-center gap-2 rounded-t-2xl shadow-md">
           <input
             type="text"
             placeholder="Who is the author of the “Don’t Die Blueprint”?"

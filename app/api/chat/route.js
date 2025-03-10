@@ -189,10 +189,12 @@ export async function POST(request) {
       chatHistory = { userId: userEmail, messages: [], createdAt: new Date() };
     }
 
-    if (chatHistory.messages.length >= 10) {
+    // set chat limit to 10 user messages and 10 AI response
+    if (chatHistory.messages.length >= 20) {
+      console.log("message limit reached");
       return NextResponse.json(
-        { error: "Message limit reached", limitReached: true },
-        { status: 403 }
+        { message: "Message limit reached", limitReached: true },
+        { status: 404 }
       );
     }
 

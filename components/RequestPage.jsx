@@ -1,5 +1,5 @@
 "use client";
-
+// new chat page
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { AiOutlineSend, AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -9,9 +9,11 @@ const RequestPage = () => {
   const [chatId, setChatId] = useState("");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [limitReached, setLimitReached] = useState("");
 
   const sendMessage = async () => {
     if (!query.trim()) return;
+    setLimitReached("");
 
     const userMessage = { role: "user", parts: [{ text: query }] };
     const updatedMessages = [...messages, userMessage];
@@ -32,6 +34,17 @@ const RequestPage = () => {
       });
 
       const data = await response.json();
+      // Check if the response contains an error
+      if (!response.ok) {
+        // Check if the user has reached message limit for each chat
+        if (data.limitReached) {
+          setLimitReached(
+            "Message limit for this chat has been exceeded, consider starting a new chat"
+          );
+          console.log(limitReached);
+        }
+        return;
+      }
       setChatId(data.chatId);
       const aiMessage = { role: "model", parts: [{ text: data.message }] };
       setMessages([...updatedMessages, aiMessage]);
@@ -45,7 +58,7 @@ const RequestPage = () => {
   return (
     <div>
       <Sidebar />
-      <div className="max-w-lg mx-auto flex flex-col h-[100vh] p-6  text-black justify-end ">
+      <div className="max-w-lg md:max-w-xl lg:max-w-2xl mx-auto flex flex-col h-[100vh] p-6  text-black justify-end ">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <h2 className="text-2xl font-bold">Hi, am Agent Bryan</h2>
@@ -76,7 +89,12 @@ const RequestPage = () => {
             ))}
           </div>
         )}
-
+        {/* display error message if limit has been reached */}
+        {limitReached && (
+          <div className="fixed max-w-lg top-12 right-4 bg-light-pink-200 text-black px-4 py-3 rounded shadow-lg animate-[slide-in-right_0.5s_ease-out,fade-out_0.5s_ease-in_2.5s_forwards]">
+            {limitReached}
+          </div>
+        )}
         {/* Input & Send Button */}
         <div className="flex items-center gap-2 p-4 bg-light-pink-50 rounded-lg ">
           <input

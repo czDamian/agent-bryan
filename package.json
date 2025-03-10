@@ -22,6 +22,7 @@
     "cheerio": "^1.0.0",
     "cookie": "^1.0.2",
     "dotenv": "^16.4.7",
+    "framer-motion": "^12.4.10",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.3",
     "js-cookie": "^3.0.5",

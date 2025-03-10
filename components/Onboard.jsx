@@ -122,7 +122,7 @@ const Onboard = () => {
             className="w-full  p-2 bg-light-pink-50 rounded hover:bg-light-pink-200 disabled:opacity-50"
             disabled={loading}
           >
-            {loading ? "Processing..." : isRegister ? "Register" : "Login"}
+            {loading ? "Validating..." : isRegister ? "Register" : "Login"}
           </button>
         </div>
       </form>
