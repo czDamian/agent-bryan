@@ -1,5 +1,7 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Benefits from "./Benefits";
 import Footer from "./Footer";
 import StatsCard from "./StatsCard";
@@ -7,8 +9,9 @@ import StatsCard from "./StatsCard";
 const Hero = () => {
   return (
     <section className="bg-light-pink-50">
-      <div className="bg-[#BD99A2] w-full">
-        {/* desktop  view */}
+      {/* Navbar */}
+      <header className="bg-[#BD99A2] w-full">
+        {/* Desktop Navigation */}
         <div className="bg-[#EFE6EA] hidden md:flex text-xl sm:text-2xl md:text-3xl font-coolvetica text-center py-4 px-12 mx-16 tracking-wider justify-between items-center">
           <Link
             href="/chat"
@@ -24,16 +27,14 @@ const Hero = () => {
             Get Started
           </Link>
         </div>
-        <div>
-          {/* for mobile view */}
-
-          <div className="bg-[#EFE6EA] text-xl sm:text-2xl md:text-3xl font-coolvetica text-center py-4 px-12 mx-16 tracking-wider md:hidden ">
-            Agent Bryan
-          </div>
+        
+        {/* Mobile Navigation */}
+        <div className="bg-[#EFE6EA] text-xl sm:text-2xl md:text-3xl font-coolvetica text-center py-4 px-12 mx-16 tracking-wider md:hidden">
+          Agent Bryan
         </div>
-      </div>
+      </header>
 
-      {/* New div wrapping the heading and hero-brain image */}
+      {/* Hero Section */}
       <div
         className="relative w-full bg-cover bg-[position:left_15%,right_60%] md:bg-[position:left_15%,right_70%] lg:bg-[position:left_15%,right_80%]"
         style={{
@@ -43,23 +44,45 @@ const Hero = () => {
         }}
       >
         <div className="relative px-4 py-6">
+          {/* Hero Text */}
           <div className="text-3xl md:text-4xl mb-96 flex gap-3 flex-col text-[#d180ac] font-coolvetica md:font-semibold">
             <div>Unlock Your</div>
             <div>Health Potential</div>
             <div>With AI-Powered</div>
             <div>Insights</div>
           </div>
-          <div>
-            <Image
-              src="/hero-brain.png"
-              height={1000}
-              width={1000}
-              alt="hero-brain"
-              className="w-80 absolute top-20 right-[-5]"
-            />
-          </div>
+          
+          {/* Hero Image with Animation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute top-20 right-[-5]"
+          >
+            <motion.div
+              animate={{ 
+                y: [0, 15, 0],
+                rotate: [0, 3, 0]
+              }}
+              transition={{ 
+                repeat: Infinity, 
+                duration: 6,
+                ease: "easeInOut"
+              }}
+            >
+              <Image
+                src="/hero-brain.png"
+                height={1000}
+                width={1000}
+                alt="hero-brain"
+                className="w-80"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
+
+      {/* CTA Button */}
       <div className="text-center py-16">
         <Link
           href="/onboard"
@@ -68,10 +91,13 @@ const Hero = () => {
           Get Started
         </Link>
       </div>
+
+      {/* Stats Section */}
       <StatsCard />
 
-      <div className="bg-[#BE98A2] text-white px-4 ">
-        <div className="flex flex-1 flex-col md:flex-row justify-center items-center ">
+      {/* Benefits Section */}
+      <div className="bg-[#BE98A2] text-white px-4">
+        <div className="flex flex-1 flex-col md:flex-row justify-center items-center">
           <div className="text-4xl lg:text-5xl space-y-4 p-4 text-center font-coolvetica">
             <div className="mt-12">Experience the</div>
             <div>benefit of using</div>
@@ -88,6 +114,8 @@ const Hero = () => {
 
         <Benefits />
       </div>
+
+      {/* Footer */}
       <Footer />
     </section>
   );
