@@ -22,7 +22,6 @@ const Sidebar = () => {
         });
         const data = await response.json();
         setHistory(data.history || []);
-        console.log("data user sidbar", data?.history[0]?.userId);
         setUserEmail(data?.history[0]?.userId);
       } catch (error) {
         console.error("Error fetching chat history:", error);
@@ -46,7 +45,7 @@ const Sidebar = () => {
 
       const result = await response.json();
       if (result?.message === "Logout successful") {
-        router.push("/onboard");
+        window.location.href = "/onboard"; //for some reasons router.push doesn't work when deployed
       }
 
       if (!response.ok) {

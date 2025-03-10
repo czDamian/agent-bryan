@@ -54,7 +54,7 @@ const Onboard = () => {
       const result = await response.json();
       setResponseMessage(result.message || "Something went wrong");
       if (result?.message === "Login successful") {
-        router.push("/chat");
+        window.location.href = "/chat";
       }
       if (result?.message === "Registered successfully, proceed to login") {
         setIsRegister(false);
@@ -130,7 +130,7 @@ const Onboard = () => {
         <p
           className={`text-sm italic text-center mt-2 ${
             responseMessage.includes("success")
-              ? ""
+              ? "text-white"
               : "text-neutral-800"
           }`}
         >
