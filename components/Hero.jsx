@@ -71,11 +71,11 @@ const Hero = () => {
               }}
             >
               <Image
-                src="/hero-brain.png"
+                src="/hero-brain.png?v=1"
                 height={1000}
                 width={1000}
                 alt="hero-brain"
-                className="w-80"
+                className="max-w-xs"
               />
             </motion.div>
           </motion.div>
