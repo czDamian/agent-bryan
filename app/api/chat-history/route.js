@@ -59,5 +59,5 @@ export async function POST(request) {
 
 // return error message if a GET request is made
 export async function GET() {
-  return NextResponse.json({ message: "unauthorized" }, { status: 400 });
+  return NextResponse.json({ message: "unauthorized" }, { status: 404 });
 }

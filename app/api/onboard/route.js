@@ -134,6 +134,8 @@ export async function POST(request) {
   }
 }
 
+// return error message if a GET request is made
 export async function GET() {
-  return NextResponse.json({ message: "Nothing" }, { status: 200 });
+  return NextResponse.json({ message: "unauthorized" }, { status: 404 });
 }
+

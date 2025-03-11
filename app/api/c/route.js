@@ -62,23 +62,8 @@ export async function POST(request) {
   return NextResponse.json({ history: results }, { status: 200 });
 }
 
+// return error message if a GET request is made
 export async function GET() {
-  const chatId = "d48de76f-057d-4cc7-8de7-6f057d5cc72b";
-  if (!chatId) {
-    return NextResponse.json({ error: "Chat ID is required" }, { status: 400 });
-  }
-
-  console.log("chat id backend", chatId);
-  let chatHistory = db.collection(ASTRA_DB_CHAT_HISTORY_COLLECTION);
-  const results = await chatHistory.find({ _id: chatId }).toArray();
-  //   console.log("specific chat history", results);
-
-  if (results.length === 0) {
-    return NextResponse.json(
-      { error: "Chat history not found" },
-      { status: 404 }
-    );
-  }
-
-  return NextResponse.json({ history: results }, { status: 200 });
+  return NextResponse.json({ message: "unauthorized" }, { status: 404 });
 }
+
