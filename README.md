@@ -102,6 +102,7 @@ Open your browser and navigate to http://localhost:3000
 5. Generate your personalized blueprint
 
 ## Architecture
+
 ```bash
 ┌───────────────┐      ┌───────────────┐      ┌───────────────┐
 │   Frontend    │◄────►│    Backend    │◄────►│   Database    │
@@ -115,11 +116,12 @@ Open your browser and navigate to http://localhost:3000
         │               │ │     APIs      │ │   Analytics   │
         └───────────────┘ └───────────────┘ └───────────────┘
 ```
+
 ## Meet The Team
 
-Damian Olebuezie - AI Engineer
-Stephanie - UI/UX Designer
-Damian Olebuezie - Frontend and Backend Developer
+- Damian Olebuezie (AI Engineer)
+- Ani Stephanie (UI/UX Designer)
+- Damian Olebuezie (Frontend and Backend Developer)
 
 ## License
 

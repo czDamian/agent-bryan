@@ -144,7 +144,10 @@ export async function POST(request) {
   const token = request.cookies.get("token")?.value;
   if (!token) {
     console.log("no token sent");
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Please Login to Continue", message: "unauthorized" },
+      { status: 404 }
+    );
   }
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
@@ -157,7 +160,7 @@ export async function POST(request) {
     if (!userEmail) {
       return NextResponse.json(
         { error: "User not logged in" },
-        { status: 401 }
+        { status: 404 }
       );
     }
 
@@ -171,7 +174,7 @@ export async function POST(request) {
     if (!message) {
       return NextResponse.json(
         { error: "No message provided" },
-        { status: 400 }
+        { status: 404 }
       );
     }
 

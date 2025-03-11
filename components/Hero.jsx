@@ -19,7 +19,7 @@ const Hero = () => {
       y: 0,
       transition: {
         delay: i * 0.2,
-        duration: 0.8,
+        duration: 0.3,
         ease: "easeOut",
       },
     }),
@@ -40,13 +40,13 @@ const Hero = () => {
               Chat
             </Link>
             <Link
-              href="/features"
+              href="#features"
               className="font-rubik tracking-normal text-lg text-[#8F788D] hover:text-[#7e6a7c] transition-colors"
             >
               Features
             </Link>
             <Link
-              href="/about"
+              href="#about"
               className="font-rubik tracking-normal text-lg text-[#8F788D] hover:text-[#7e6a7c] transition-colors"
             >
               About

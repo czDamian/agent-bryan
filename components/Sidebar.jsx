@@ -20,6 +20,9 @@ const Sidebar = () => {
           credentials: "include",
         });
         const data = await response.json();
+        if (!data.history) {
+          return;
+        }
         setHistory(data.history || []);
         setUserEmail(data?.history[0]?.userId);
       } catch (error) {
@@ -62,23 +65,23 @@ const Sidebar = () => {
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 30
-      }
+        damping: 30,
+      },
     },
     closed: {
       x: "-100%",
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 30
-      }
-    }
+        damping: 30,
+      },
+    },
   };
 
   // Backdrop animation variants
   const backdropVariants = {
     open: { opacity: 1 },
-    closed: { opacity: 0 }
+    closed: { opacity: 0 },
   };
 
   return (
@@ -97,11 +100,11 @@ const Sidebar = () => {
           />
         </Link>
       </div>
-      
+
       {/* Animated overlay */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial="closed"
             animate="open"
             exit="closed"
@@ -111,9 +114,9 @@ const Sidebar = () => {
           />
         )}
       </AnimatePresence>
-      
+
       {/* Animated sidebar */}
-      <motion.div 
+      <motion.div
         className="fixed left-0 top-0 w-64 h-full bg-light-pink-50 text-black p-4 shadow-lg z-50"
         initial="closed"
         animate={isOpen ? "open" : "closed"}
@@ -133,10 +136,11 @@ const Sidebar = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, staggerChildren: 0.1 }}
             >
-              {history.length >= 0 &&
+              {history &&
+                history.length >= 0 &&
                 history.map((chat) => (
-                  <motion.li 
-                    key={chat._id} 
+                  <motion.li
+                    key={chat._id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}

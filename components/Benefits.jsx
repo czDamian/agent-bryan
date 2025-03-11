@@ -62,7 +62,7 @@ export default function Benefits() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-coolvetica font-bold mb-4">
+          <h2  id="features" className="text-3xl font-coolvetica font-bold mb-4">
             Powerful Features
           </h2>
           <p className="max-w-2xl mx-auto text-lg opacity-90">

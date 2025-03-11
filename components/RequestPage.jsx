@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Sidebar from "./Sidebar";
-import ChatInput from "./ChatComponents/ChatInput";
+import ChatInput from "./ChatInput";
 
 // Separate components for better organization
 const EmptyStateMessage = () => (

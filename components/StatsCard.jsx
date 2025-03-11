@@ -2,7 +2,7 @@ import React from "react";
 import { FaUser, FaDatabase, FaChartLine } from "react-icons/fa";
 
 const StatItem = ({ icon, value, label }) => (
-  <div className="flex-1 bg-gradient-to-b from-[#484245] to-[#774F65] bg-opacity-80 px-4 py-4 flex flex-col items-start justify-center text-white border-r border-[#774F65] last:border-r-0">
+  <div id="about" className="flex-1 bg-gradient-to-b from-[#484245] to-[#774F65] bg-opacity-80 px-4 py-4 flex flex-col items-start justify-center text-white border-r border-[#774F65] last:border-r-0">
     <div className="mb-2 p-1 bg-white bg-opacity-10 rounded">
       {icon}
     </div>

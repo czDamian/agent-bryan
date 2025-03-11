@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Sidebar from "@/components/Sidebar";
-import ChatInput from "./ChatComponents/ChatInput";
+import ChatInput from "./ChatInput";
 
 // Extract message component for reusability
 const ChatMessage = ({ message }) => (
