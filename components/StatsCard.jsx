@@ -1,6 +1,18 @@
 import React from "react";
 import { FaUser, FaDatabase, FaChartLine } from "react-icons/fa";
 
+const StatItem = ({ icon, value, label }) => (
+  <div className="flex-1 bg-gradient-to-b from-[#484245] to-[#774F65] bg-opacity-80 px-4 py-4 flex flex-col items-start justify-center text-white border-r border-[#774F65] last:border-r-0">
+    <div className="mb-2 p-1 bg-white bg-opacity-10 rounded">
+      {icon}
+    </div>
+    <div className="text-3xl md:text-5xl font-bold mt-1">{value}</div>
+    <div className="mt-1">
+      <div className="text-sm">{label}</div>
+    </div>
+  </div>
+);
+
 const StatsCard = () => {
   const statsData = [
     {
@@ -24,22 +36,14 @@ const StatsCard = () => {
   ];
 
   return (
-    <div className="flex mx-auto max-w-xl w-max flex-col sm:flex-row gap-4 sm:gap-2 md:gap-4 py-8 ">
+    <div className="flex mx-auto max-w-xl w-max flex-col sm:flex-row gap-4 sm:gap-2 md:gap-4 py-8">
       {statsData.map((stat) => (
-        <div
+        <StatItem
           key={stat.id}
-          className=" flex-1 bg-gradient-to-b from-[#484245]  to-[#774F65] bg-opacity-80 px-4 py-4 flex flex-col items-start justify-center text-white border-r border-[#774F65] last:border-r-0"
-        >
-          <div className="mb-2 p-1 bg-white bg-opacity-10 rounded">
-            {stat.icon}
-          </div>
-          <div className="text-3xl md:text-5xl font-bold mt-1">
-            {stat.value}
-          </div>
-          <div className="mt-1">
-            <div className="text-sm">{stat.label}</div>
-          </div>
-        </div>
+          icon={stat.icon}
+          value={stat.value}
+          label={stat.label}
+        />
       ))}
     </div>
   );
