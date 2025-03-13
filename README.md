@@ -2,7 +2,7 @@
 
 An AI-powered agent that introduces users to Bryan Johnson's "Don't Die Blueprint" and generates personalized longevity blueprints.
 
-![Logo](/hdLogo.png)
+![Logo](https://raw.githubusercontent.com/czDamian/agent-bryan/refs/heads/main/public/hdLogo.png)
 
 ## About The Project
 
@@ -76,6 +76,12 @@ ASTRA_DB_CHAT_HISTORY_COLLECTION = ""
 JWT_SECRET=""
 
 
+```
+
+### Run the script
+
+```bash
+node datastax.js
 ```
 
 ### Start the development server

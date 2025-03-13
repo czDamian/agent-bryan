@@ -5,14 +5,34 @@ import ReactMarkdown from "react-markdown";
 import Sidebar from "./Sidebar";
 import ChatInput from "./ChatInput";
 
+// Sample questions for users to pick from
+const commonQuestions = [
+  "What is the Don't Die Blueprint?",
+  "How can I improve my health using the blueprint?",
+  "What are the core principles of the blueprint?",
+  "Can the blueprint help with mental health?",
+  "Is there a step-by-step guide to follow?",
+];
+
 // Separate components for better organization
-const EmptyStateMessage = () => (
+const EmptyStateMessage = ({ onSelectQuestion }) => (
   <div className="flex flex-col items-center justify-center h-full text-center">
     <h2 className="text-2xl font-bold">Hi, I'm Agent Bryan</h2>
     <p className="text-neutral-800 mt-2">
       Ask me anything about the "Don't Die Blueprint" and I will do my best to
       assist you.
     </p>
+    <div className="mt-4 w-full max-w-md space-y-2">
+      {commonQuestions.map((question, index) => (
+        <button
+          key={index}
+          className="w-full text-left p-3 bg-light-pink-100 text-dark-pink-400 rounded-lg hover:bg-light-pink-200 transition"
+          onClick={() => onSelectQuestion(question)}
+        >
+          {question}
+        </button>
+      ))}
+    </div>
   </div>
 );
 
@@ -46,11 +66,12 @@ const RequestPage = () => {
   const [loading, setLoading] = useState(false);
   const [limitReached, setLimitReached] = useState("");
 
-  const sendMessage = async () => {
-    if (!query.trim()) return;
+  const sendMessage = async (text) => {
+    const messageText = text || query;
+    if (!messageText.trim()) return;
     setLimitReached("");
 
-    const userMessage = { role: "user", parts: [{ text: query }] };
+    const userMessage = { role: "user", parts: [{ text: messageText }] };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
     setQuery("");
@@ -61,7 +82,7 @@ const RequestPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: query,
+          message: messageText,
           history: updatedMessages,
           chatId: chatId,
         }),
@@ -94,9 +115,9 @@ const RequestPage = () => {
   return (
     <div>
       <Sidebar />
-      <div className="max-w-lg md:max-w-xl lg:max-w-2xl mx-auto flex flex-col h-[100vh] p-6 text-black justify-end">
+      <div className="max-w-lg md:max-w-xl lg:max-w-2xl mx-auto flex flex-col h-[100vh] px-6 py-12 text-black justify-end">
         {messages.length === 0 ? (
-          <EmptyStateMessage />
+          <EmptyStateMessage onSelectQuestion={sendMessage} />
         ) : (
           <div className="flex-1 overflow-y-auto space-y-4 p-4">
             {messages.map((message, index) => (

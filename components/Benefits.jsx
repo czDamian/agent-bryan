@@ -17,8 +17,8 @@ const cardData = [
       "Get AI-curated nutrition recommendations tailored to your dietary preferences, health goals, and restrictions. Our system learns from your feedback to continuously improve your meal suggestions.",
     link: "/personalize",
     iconSvg: <AiOutlineShoppingCart className="w-8 h-8" />,
-    button: "Explore Meal Plans",
-    color: "from-[#764F65] to-[#4A4247]",
+    button: "Explore ",
+    color: "from-[#914F47] to-[#914F47]",
   },
   {
     title: "Smart Fitness Guidance",
@@ -27,7 +27,7 @@ const cardData = [
     link: "#fitness",
     iconSvg: <FaRegHeart className="w-8 h-8" />,
     button: "Start Training",
-    color: "from-[#764F65] to-[#4A4247]",
+    color: "from-[#914F47] to-[#914F47]",
   },
   {
     title: "Health Insights & Analysis",
@@ -36,7 +36,7 @@ const cardData = [
     link: "#insights",
     iconSvg: <BsBarChartFill className="w-8 h-8" />,
     button: "View Insights",
-    color: "from-[#764F65] to-[#4A4247]",
+    color: "from-[#914F47] to-[#914F47]",
   },
   {
     title: "Seamless Integrations",
@@ -45,7 +45,7 @@ const cardData = [
     link: "#coming-soon",
     iconSvg: <IoFlashOutline className="w-8 h-8" />,
     button: "Connect Devices",
-    color: "from-[#764F65] to-[#4A4247]",
+    color: "from-[#914F47] to-[#914F47]",
   },
 ];
 
@@ -62,7 +62,7 @@ export default function Benefits() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2  id="features" className="text-3xl font-coolvetica font-bold mb-4">
+          <h2 id="features" className="text-3xl font-coolvetica font-bold mb-4">
             Powerful Features
           </h2>
           <p className="max-w-2xl mx-auto text-lg opacity-90">
@@ -99,10 +99,6 @@ export default function Benefits() {
                 transition={{
                   duration: 8,
                   ease: "linear",
-                }}
-                style={{
-                  backgroundImage: 'url("/pattern-dots.png")',
-                  backgroundSize: "200% 200%",
                 }}
               />
 

@@ -87,7 +87,7 @@ const Sidebar = () => {
   return (
     <div className="">
       {/* Top Navigation Bar */}
-      <div className="fixed bg-transparent backdrop-blur-md top-0 left-1/2 transform -translate-x-1/2 w-full max-w-lg md:max-w-xl lg:max-w-2xl text-white px-4 py-3 flex items-center justify-between">
+      <div className="fixed bg-transparent backdrop-blur-lg top-0 left-1/2 transform -translate-x-1/2 w-full max-w-lg md:max-w-xl lg:max-w-2xl text-white px-4 py-3 flex items-center justify-between">
         <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Sidebar">
           <AiOutlineMenu size={24} title="Sidebar" />
         </button>
@@ -117,18 +117,18 @@ const Sidebar = () => {
 
       {/* Animated sidebar */}
       <motion.div
-        className="fixed left-0 top-0 w-64 h-full bg-light-pink-50 text-black p-4 shadow-lg z-50"
+        className="fixed left-0 top-0 w-64 md:w-72 h-full bg-light-pink-50 text-black p-4 shadow-lg z-50"
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         variants={sidebarVariants}
       >
         <button
           onClick={() => setIsOpen(false)}
-          className="p-2 text-white bg-light-pink-100 mb-8"
+          className="p-2 text-white bg-deep-wood-100 mb-8"
         >
           <AiOutlineClose size={24} />
         </button>
-        <div className="flex flex-col space-between justify-between min-h-[80vh]">
+        <div className="flex flex-col space-between justify-between min-h-[80vh] ">
           <ul>
             <h2 className="text-xl font-semibold mb-4">Recent Chats</h2>
             <motion.div
@@ -147,7 +147,7 @@ const Sidebar = () => {
                   >
                     <Link
                       href={`/c/${chat._id}`}
-                      className="block py-2 px-6 hover:bg-light-pink-100 rounded-md capitalize"
+                      className="block py-2 px-6 text-sm md:text-base hover:bg-deep-wood-100 rounded-md capitalize"
                     >
                       {chat.messages.length > 0
                         ? chat.messages[0].msg
@@ -164,20 +164,20 @@ const Sidebar = () => {
             <div className="flex flex-col gap-2">
               <Link
                 href="/"
-                className="hover:bg-light-pink-100 py-2 px-2 rounded-md"
+                className="hover:bg-deep-wood-100 py-2 px-2 rounded-md"
               >
                 Home
               </Link>
               <Link
                 href="/personalize"
-                className="hover:bg-light-pink-100 py-2 px-2 rounded-md"
+                className="hover:bg-deep-wood-100  py-2 px-2 rounded-md"
               >
                 Personalize
               </Link>
               <div
                 onClick={logout}
                 title={userEmail}
-                className="hover:bg-light-pink-100 py-2 px-2 rounded-md cursor-pointer"
+                className="hover:bg-deep-wood-100  py-2 px-2 rounded-md cursor-pointer"
               >
                 <FaCircleUser className="inline pr-2" size={28} />
                 Sign Out

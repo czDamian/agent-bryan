@@ -26,11 +26,11 @@ const Hero = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-[#EFE6EA] to-[#F9F4F6]">
+    <section className="bg-white">
       {/* Navbar */}
       <header className="w-full">
         {/* Desktop Navigation */}
-        <div className="bg-[#EFE6EA] hidden md:flex text-xl sm:text-2xl md:text-3xl font-coolvetica py-6 px-12 mx-auto max-w-7xl tracking-wider justify-between items-center border-b border-[#D9BDC5]">
+        <div className="bg-[#EFE6EA] hidden md:flex text-xl sm:text-2xl md:text-3xl font-coolvetica py-6 px-12 mx-auto max-w-full tracking-wider justify-between items-center border-b border-[#D9BDC5]">
           <div className="flex items-center space-x-8">
             <div className="text-[#BD99A2] font-bold">Agent Bryan</div>
             <Link
@@ -61,7 +61,7 @@ const Hero = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="bg-[#EFE6EA] flex justify-between items-center text-xl sm:text-2xl md:text-3xl font-coolvetica text-center py-4 px-6 md:hidden border-b border-[#D9BDC5]">
+        <div className="bg-[#f8f3f6] flex justify-between items-center text-xl sm:text-2xl md:text-3xl font-coolvetica text-center py-4 px-6 md:hidden border-b border-[#D9BDC5]">
           <div className="text-[#BD99A2] font-bold">Agent Bryan</div>
           <Link
             href="/onboard"
@@ -156,24 +156,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 1.5 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#f2d9e6] to-[#e5c2d0] rounded-3xl overflow-hidden">
-                <motion.div
-                  className="absolute inset-0 opacity-20"
-                  animate={{
-                    backgroundPosition: ["0% 0%", "100% 100%"],
-                  }}
-                  transition={{
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    duration: 20,
-                    ease: "linear",
-                  }}
-                  style={{
-                    backgroundImage: 'url("/neural-pattern.png")',
-                    backgroundSize: "200% 200%",
-                  }}
-                />
-
+              <div className="absolute inset-0 bg-gradient-to-br from-[#e9cedc] to-[#dab4c3] rounded-3xl overflow-hidden">
                 <div className="relative h-full flex flex-col justify-center items-center p-8 text-center z-10">
                   <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
@@ -289,7 +272,7 @@ const Hero = () => {
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-[#F9F4F6] p-8 rounded-xl shadow-sm"
+                className="bg-[#e6dbdf] p-8 rounded-xl shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
@@ -342,9 +325,9 @@ const Hero = () => {
       </div>
 
       {/* Benefits Section */}
-      <div className="bg-[#BE98A2] text-white px-4 py-16">
+      <div className="bg-deep-wood-300 text-white px-4 py-16">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-1 flex-col md:flex-row justify-center items-center mb-12">
+          <div className="flex flex-1 flex-col md:flex-row justify-center items-center mb-12 mx-auto max-w-4xl">
             <motion.div
               className="text-4xl lg:text-5xl space-y-4 p-4 text-center font-coolvetica"
               initial={{ opacity: 0, x: -20 }}

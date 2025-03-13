@@ -11,7 +11,7 @@ const {
   ASTRA_DB_APPLICATION_TOKEN,
   ASTRA_DB_NAMESPACE,
   ASTRA_DB_COLLECTION,
-  ASTRA_DB_CHAT_HISTORY_COLLECTION
+  ASTRA_DB_CHAT_HISTORY_COLLECTION,
 } = process.env;
 
 // Initialize the client and model
@@ -33,13 +33,13 @@ const splitter = new RecursiveCharacterTextSplitter({
 const createCollection = async () => {
   const res = await db.createCollection(ASTRA_DB_CHAT_HISTORY_COLLECTION, {
     vector: {
-      dimension: 768, //1536 is for openAI, 768 is for gemini
+      dimension: 768, // 768 is the correct dimension for gemini
       metric: "dot_product",
     },
   });
   console.log("Collection created:", res);
 };
-// createCollection();
+createCollection();
 
 (async () => {
   const colls = await db.listCollections();
@@ -59,7 +59,7 @@ const bryanSites = [
   "https://dontdieapp.com/",
   "https://dontdieapp.notion.site/",
   "https://dontdie.com/",
-  "https://blueprint.bryanjohnson.com/blogs/news"
+  "https://blueprint.bryanjohnson.com/blogs/news",
 ];
 
 const scrapePage = async (url) => {
@@ -99,4 +99,7 @@ const loadSampleData = async () => {
   }
 };
 
-// loadSampleData();
+loadSampleData();
+
+
+// create the collection first and load the env variables, then call the loadsample function 
