@@ -2,7 +2,7 @@
 
 An AI-powered agent that introduces users to Bryan Johnson's "Don't Die Blueprint" and generates personalized longevity blueprints.
 
-![Logo](https://raw.githubusercontent.com/czDamian/agent-bryan/refs/heads/main/public/hdLogo.png)
+![Demo](https://github.com/czDamian/agent-bryan/blob/main/public/screenshot3.png)
 
 ## About The Project
 
@@ -15,12 +15,14 @@ Agent One is an open-source AI Agent developed to help users understand the prin
   - Simple explanations of Bryan Johnson's "Don't Die Blueprint"
   - Q&A capability for longevity-related questions
   - Evidence-based insights about longevity practices
+    ![Demo](https://github.com/czDamian/agent-bryan/blob/main/public/screenshot1.png)
 
 - **Personalized Blueprint Generator**
 
   - Custom recommendations based on user profiles (age, diet, activity level, health goals)
   - Adaptation of the blueprint principles to individual circumstances
   - Actionable insights tailored to user needs
+    ![Demo](https://github.com/czDamian/agent-bryan/blob/main/public/screenshot2.png)
 
 - **Exportable Reports**
   - PDF download option for personalized blueprints
