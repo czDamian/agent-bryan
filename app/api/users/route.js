@@ -9,7 +9,7 @@ const {
 } = process.env;
 
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
-const db = client.db(ASTRA_DB_API_ENDPOINT, { namespace: ASTRA_DB_NAMESPACE });
+const db = client.db(ASTRA_DB_API_ENDPOINT, { keyspace: ASTRA_DB_NAMESPACE });
 const collection = db.collection(ASTRA_DB_USER_COLLECTION);
 
 // export async function GET() {

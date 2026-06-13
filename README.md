@@ -80,7 +80,15 @@ JWT_SECRET=""
 
 ```
 
-### Run the script
+### Create and Populate the Database
+
+First, create the AstraDB collection by running the following command. This will set up the necessary table with the correct vector dimensions.
+
+```bash
+node create-collection.js
+```
+
+Next, populate the collection with the initial data required for the agent to function.
 
 ```bash
 node datastax.js

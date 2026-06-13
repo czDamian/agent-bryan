@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.mjs";
 
 body {
   @apply bg-gradient-to-b min-h-[100vh] from-deep-wood-100 to-deep-wood-300 m-0 p-0 font-rubik box-border;

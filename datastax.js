@@ -23,23 +23,14 @@ if (!ASTRA_DB_API_ENDPOINT || !ASTRA_DB_APPLICATION_TOKEN) {
 }
 
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
-const db = client.db(ASTRA_DB_API_ENDPOINT, { namespace: ASTRA_DB_NAMESPACE });
+const db = client.db(ASTRA_DB_API_ENDPOINT, { keyspace: ASTRA_DB_NAMESPACE });
 
 const splitter = new RecursiveCharacterTextSplitter({
   chunkSize: 512,
   chunkOverlap: 100,
 });
 
-const createCollection = async () => {
-  const res = await db.createCollection(ASTRA_DB_CHAT_HISTORY_COLLECTION, {
-    vector: {
-      dimension: 768, // 768 is the correct dimension for gemini
-      metric: "dot_product",
-    },
-  });
-  console.log("Collection created:", res);
-};
-createCollection();
+
 
 (async () => {
   const colls = await db.listCollections();

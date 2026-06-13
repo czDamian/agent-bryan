@@ -19,7 +19,7 @@ const embeddingModel = genAI.getGenerativeModel({
 });
 
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
-const db = client.db(ASTRA_DB_API_ENDPOINT, { namespace: ASTRA_DB_NAMESPACE });
+const db = client.db(ASTRA_DB_API_ENDPOINT, { keyspace: ASTRA_DB_NAMESPACE });
 const collection = db.collection(ASTRA_DB_COLLECTION);
 const universalMessage =
   "how to create a personalized blueprint based on activity level, diet and health goals"; //use this for .....

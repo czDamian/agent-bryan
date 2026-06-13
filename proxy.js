@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export function middleware(request) {
+export function proxy(request) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 
@@ -17,7 +17,7 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
-// Apply middleware only to /chat, /personalize, and /onboard
+// Apply proxy only to /chat, /personalize, and /onboard
 export const config = {
   matcher: ["/chat", "/personalize", "/onboard"],
 };
